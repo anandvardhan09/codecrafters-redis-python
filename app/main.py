@@ -11,7 +11,16 @@ def main():
     server_socket.accept() # wait for client
     comm, tt = server_socket.accept()  # wait for client
 
+    comm, _ = server_socket.accept()  # wait for client
+
+    # Read the incoming data (ignoring the input)
+    comm.recv(1024)  # Read data from the client (minimal read, we can ignore the content)
+
+    # Send the response to the client
     comm.sendall(b"+PONG\r\n")
+    comm.close()  # Close the connection after responding
+
+
 
 
 if __name__ == "__main__":
